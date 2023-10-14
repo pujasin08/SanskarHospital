@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Drug List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"> Drug List</h4>
+                <div><a href="/Admin/Drug" style="text-decoration:underline !important">Go Back</a></div>
+                <br />
+                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                <div class="table-responsive m-t-30">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Drug Name</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Drug Name</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @if (ViewBag.druglist != null)
+                            {
+                                foreach (SanskarHospital.Models.DrugModel i in ViewBag.druglist)
+                                {
+                                    <tr id="Busval_@i.drug_id">
+
+                                        <td>@(++co)</td>
+                                        <td>@i.drug_name</td>
+
+                                        <td class="text-nowrap">
+                                            <a href="/Admin/Drug/@i.drug_id" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            <a onclick="RemoveDrug(@i.drug_id)" href="javascript:void(0)" data-toggle="tooltip" data-original-title="Remove"> <i class="fa fa-close text-danger"></i> </a>
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

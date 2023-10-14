@@ -1,0 +1,274 @@
+﻿@model SanskarHospital.Models.DoctorModel
+@{
+    ViewBag.Title = "Doctor";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    TempData["DoctorSetting"] = "class=" + "active";
+    TempData["PatientInfo"] = "class=" + "active";
+}
+
+<!-- Datepicker CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+<style>
+
+    .date-picker {
+        position: relative;
+    }
+
+        .date-picker i {
+            position: absolute;
+            top: 70%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .date-picker input[type="date"] {
+            padding-right: 30px;
+        }
+</style>
+
+<div class="container-fluid">
+    @if (TempData["MSG"] != null)
+    {
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+            <strong>@TempData["MSG"]</strong>
+        </div>
+    }
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card ">
+                <div class="card-header bg-info">
+                    <h4 class="m-b-0 text-white"> Doctor</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/Admin/Doctor" method="post" class="form-horizontal" enctype="multipart/form-data">
+                        <div class="form-body">
+                            <h3 class="box-title">Add/Edit Doctor</h3>
+                            <hr class="m-t-0 m-b-40">
+                            <div class="row">
+
+                                @Html.HiddenFor(model => model.doctor_id)
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Name<span class="require"></span></label>
+                                        @Html.TextBoxFor(model => model.doctor_name, new { @class = "form-control", @required = "true", @placeholder = "Name", @maxlength = "150" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Mobile No.<span class="require"></span></label>
+                                        @Html.TextBoxFor(model => model.doctor_mobile, new { @class = "form-control numberonly", @required = "true", @placeholder = "Mobile No", @maxlength = "10" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Email<span class="require"></span></label>
+                                        @Html.TextBoxFor(model => model.doctor_email, new { @class = "form-control", @required = "true", @placeholder = "Email", @type = "email" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Degree<span class="require"></span></label>
+                                        @Html.TextBoxFor(model => model.doctor_degree, new { @class = "form-control", @required = "true", @placeholder = "Degree" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-7">
+                                    <h4 class="card-title">Gender</h4>
+                                    <div class="demo-radio-button">
+                                        <input name="doctor_sex" value="Male" type="radio" id="radio_1" @(Model.doctor_sex == "Male" ? "checked" : "")>
+                                        <label for="radio_1">Male</label>
+                                        <input name="doctor_sex" value="Female" type="radio" id="radio_2" @(Model.doctor_sex == "Female" ? "checked" : "")>
+                                        <label for="radio_2">Female</label>
+                                        <input name="doctor_sex" value="Other" type="radio" id="radio_3" @(Model.doctor_sex == "Other" ? "checked" : "")>
+                                        <label for="radio_3">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Specialization<span class="require"></span></label>
+                                        @Html.TextAreaFor(model => model.doctor_specialization, new { @class = "form-control", @required = "true", @placeholder = "Specialization" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Address<span class="require"></span></label>
+                                        @Html.TextAreaFor(model => model.doctor_address, new { @class = "form-control", @required = "true", @placeholder = "Address" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <label class="control-label text-right ">Status<span class="require"></span></label>
+
+                                        @Html.DropDownListFor(model => model.is_active,
+                                    new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text="ACTIVE", Value="ACTIVE"},
+                                        new SelectListItem { Text="DEACTIVE", Value="DEACTIVE"}
+                                    }
+                                    , new { @class = "form-control" }
+                                    )
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <hr>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn btn-success">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"> Patient List</h4>
+                    <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                    <div class="table-responsive m-t-30">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Mobile</th>
+                                    <th>Gender</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Mobile</th>
+                                    <th>Gender</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (ViewBag.doctorlist != null)
+                                {
+                                    foreach (SanskarHospital.Models.DoctorModel i in ViewBag.doctorlist)
+                                    {
+                                        <tr id="Busval_@i.doctor_id">
+
+                                            <td>@i.doctor_id</td>
+                                            <td>@i.doctor_name</td>
+                                            <td>@i.doctor_mobile</td>
+                                            <td>@i.doctor_sex</td>
+
+                                            @if (i.is_active == "ACTIVE")
+                                            {
+                                                <td><button class="btn btn-success btn-rounded">ACTIVE</button></td>
+                                            }
+                                            else
+                                            {
+                                                <td><button class="btn btn-danger btn-rounded">DEACTIVE</button></td>
+                                            }
+
+                                            <td class="text-nowrap">
+                                                <a href="/Admin/Doctor/@i.doctor_id" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a onclick="RemoveDoctor(@i.doctor_id)" href="javascript:void(0)" data-toggle="tooltip" data-original-title="Remove"> <i class="fa fa-close text-danger"></i> </a>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS -->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+
+
+
+<script>
+    function RemoveDoctor(id) {
+        if (confirm("Are you sure?")) {
+            $.getJSON('/Admin/DeleteDoctor/' + id, function (data) {
+                if (data != '') {
+                    $('#Busval_' + id).remove();
+                    $.toast({
+                        heading: 'Welcome To Sanskar Hospital',
+                        text: 'Data Deleted Successfully..!',
+                        position: 'top-right',
+                        loaderBg: '#ff6849',
+                        icon: 'success',
+                        hideAfter: 3500,
+                        stack: 6
+                    });
+
+                }
+                else {
+                    $.toast({
+                        heading: 'Welcome To Sanskar Hospital',
+                        text: 'Oops Something going wrong..!',
+                        position: 'top-right',
+                        loaderBg: '#ff6849',
+                        icon: 'error',
+                        hideAfter: 3500
+
+                    });
+                }
+
+            });
+        }
+        return false;
+    }
+</script>
+
+<script src="/admin_assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script>
+    $('.datepicker').datepicker();
+</script>
+

@@ -1,0 +1,71 @@
+﻿  
+@{
+    ViewBag.Title = "RBS Chart List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">RBS Chart List</h4>
+                    <div><a href="/Admin/RBSChart" style="text-decoration:underline !important">Go Back</a></div>
+                    <br />
+                    <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                    <div class="table-responsive m-t-30">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Name Of Doctor</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>RBS</th>
+                                    <th>Insuline Given</th>
+                                    <th>Name Of Nurse</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Name Of Doctor</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>RBS</th>
+                                    <th>Insuline Given</th>
+                                    <th>Name Of Nurse</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (ViewBag.rbschartlist != null)
+                                {
+                                    foreach (SanskarHospital.Models.RBSChartModel i in ViewBag.rbschartlist)
+                                    {
+                                        <tr id="Busval_@i.patient_id">
+
+                                            <td>@(++co)</td>
+                                            <td>@i.doctor_id</td>
+                                            <td>@i.date</td>
+                                            <td>@i.time</td>
+                                            <td>@i.rbs</td>
+                                            <td>@i.insuline_given</td>
+                                            <td>@i.nurse_id</td>
+
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

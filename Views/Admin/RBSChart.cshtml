@@ -1,0 +1,133 @@
+﻿@model SanskarHospital.Models.RBSChartModel
+@{
+    ViewBag.Title = "RBS Chart";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    TempData["RBSChartSetting"] = "class=" + "active";
+    TempData["RBSChart"] = "class=" + "active";
+}
+
+<div class="container-fluid">
+    @if (TempData["MSG"] != null)
+    {
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+            <strong>@TempData["MSG"]</strong>
+        </div>
+    }
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-info">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="m-b-0 text-white">RBS Chart</h4>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <form action="/Admin/RBSChart" method="post" class="form-horizontal" enctype="multipart/form-data">
+                        <div class="form-body">
+                            <a href="/Admin/RBSChartList" style="text-decoration:underline !important">Go to List</a>
+                            <hr class="m-t-0 m-b-40">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Patient's Name<span class="require"></span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(model => model.patient_id, ViewBag.PatientList as SelectList, "--Select--", new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Doctor's Name<span class="require"></span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(model => model.doctor_id, ViewBag.DoctorList as SelectList, "--Select--", new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Date<span class="require"></span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.date, new { @class = "form-control", @placeholder = "Date", @type = "date" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Time<span class="require"></span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.time, new { @class = "form-control", @required = "true", @placeholder = "Time", @type = "time" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">RBS<span class="require"></span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.rbs, new { @class = "form-control", @placeholder = "RBS", @maxlength = "50" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Insuline Given<span class="require"></span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.insuline_given, new { @class = "form-control", @placeholder = "Insuline Given", @maxlength = "50" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-right">Name Of Nurse<span class="require"></span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(model => model.nurse_id, ViewBag.NurseList as SelectList, "--Select--", new { @class = "form-control", @required = "required" })
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn btn-success">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

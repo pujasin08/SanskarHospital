@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Anaesthesia Master List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Anaesthesia Master List</h4>
+                    <div><a href="/Admin/AnaesthesiaMaster" style="text-decoration:underline !important">Go Back</a></div>
+                    <br />
+                    <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                    <div class="table-responsive m-t-30">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Anaesthesia Name</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Anaesthesia Name</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (ViewBag.anaesthesialist != null)
+                                {
+                                    foreach (SanskarHospital.Models.AnaesthesiaMasterModel i in ViewBag.anaesthesialist)
+                                    {
+                                        <tr id="Busval_@i.anaesthesia_id">
+
+                                            <td>@(++co)</td>
+                                            <td>@i.anaesthesia_name</td>
+                                            <td class="text-nowrap">
+                                                <a href="/Admin/AnaesthesiaMaster/@i.anaesthesia_id" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

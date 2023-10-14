@@ -1,0 +1,28 @@
+.mytable {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+  }
+
+.spantable {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+.myform {
+  padding-left: 50px;
+  padding-right: 5px;
+}
+
+.mydate{
+  text-align: right;
+}
+
+h4 {
+  text-align: center;
+}
+
+h5 {
+  text-align: center;
+}

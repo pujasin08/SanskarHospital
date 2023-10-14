@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "Nursing Assessment List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Nursing Assessment List</h4>
+                    <div><a href="/Admin/NursingAssessment" style="text-decoration:underline !important">Go Back</a></div>
+                    <br />
+                    <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                    <div class="table-responsive m-t-30">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Date</th>
+                                    <th>Unit</th>
+                                    <th>Arrival Time</th>
+                                    <th>Assessment Time</th>
+                                    <th>Name Of Nurse</th>
+                                    <th>Admitted Form</th>
+                                    <th>Patient Arrived</th>
+                                    <th>Height</th>
+                                    <th>Weight</th>
+                                    <th>Unable Weight</th>
+                                    <th>Estimated Weight</th>
+                                    <th>Reason</th>
+                                    <th>Temp</th>
+                                    <th>Pulse</th>
+                                    <th>Respiration</th>
+                                    <th>BP</th>
+                                    <th>SPO2</th>
+                                    <th>LOC</th>
+                                    <th>HO Allergy</th>
+                                    <th>Dentures</th>
+                                    <th>Spactacles</th>
+                                    <th>Id Belt</th>
+                                    <th>Id Color</th>
+                                    <th>Vulnerable</th>
+                                    <th>Bedsore</th>
+                                    <th>Bedsore Details</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Date</th>
+                                    <th>Unit</th>
+                                    <th>Arrival Time</th>
+                                    <th>Assessment Time</th>
+                                    <th>Name Of Nurse</th>
+                                    <th>Admitted Form</th>
+                                    <th>Patient Arrived</th>
+                                    <th>Height</th>
+                                    <th>Weight</th>
+                                    <th>Unable Weight</th>
+                                    <th>Estimated Weight</th>
+                                    <th>Reason</th>
+                                    <th>Temp</th>
+                                    <th>Pulse</th>
+                                    <th>Respiration</th>
+                                    <th>BP</th>
+                                    <th>SPO2</th>
+                                    <th>LOC</th>
+                                    <th>HO Allergy</th>
+                                    <th>Dentures</th>
+                                    <th>Spactacles</th>
+                                    <th>Id Belt</th>
+                                    <th>Id Color</th>
+                                    <th>Vulnerable</th>
+                                    <th>Bedsore</th>
+                                    <th>Bedsore Details</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (ViewBag.nursingassessmentlist != null)
+                                {
+                                    foreach (SanskarHospital.Models.NursingAssessmentModel i in ViewBag.nursingassessmentlist)
+                                    {
+                                <tr id="Busval_@i.patient_id">
+
+                                    <td>@(++co)</td>
+                                    <td>@i.patient_id</td>
+                                    <td>@i.date</td>
+                                    <td>@i.unit</td>
+                                    <td>@i.arrival_time</td>
+                                    <td>@i.assessment_time</td>
+                                    <td>@i.nurse_id</td>
+                                    <td>@i.admitted_form</td>
+                                    <td>@i.patient_arrived</td>
+                                    <td>@i.hight</td>
+                                    <td>@i.weight</td>
+                                    <td>@i.unable_weight</td>
+                                    <td>@i.estimatted_weight</td>
+                                    <td>@i.reason</td>
+                                    <td>@i.temp</td>
+                                    <td>@i.pulse</td>
+                                    <td>@i.respiration</td>
+                                    <td>@i.bp</td>
+                                    <td>@i.spo2</td>
+                                    <td>@i.loc</td>
+                                    <td>@i.ho_allergy</td>
+                                    <td>@i.dentures</td>
+                                    <td>@i.spactacles</td>
+                                    <td>@i.id_belt</td>
+                                    <td>@i.id_colour</td>
+                                    <td>@i.vulnerable</td>
+                                    <td>@i.bedsore</td>
+                                    <td>@i.bedsore_details</td>
+
+                                </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

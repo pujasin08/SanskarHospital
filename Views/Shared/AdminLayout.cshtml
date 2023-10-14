@@ -1,0 +1,723 @@
+﻿@using SanskarHospital.Helpers;
+@{
+    EncryptDecrypt enc = new EncryptDecrypt();
+    HttpCookie loginCookie = Request.Cookies["sanskarhospital"];
+    try
+    {
+
+        if (enc.Decrypt(loginCookie.Values["UserType"]) != "ADMIN")
+        {
+            TempData["MSG"] = "Please Login First";
+            Response.Redirect("~/Login/Index");
+        }
+    }
+    catch (Exception ex)
+    {
+        TempData["MSG"] = "Please Login First";
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/admin_assets/images/favicon.png">
+    <title>Sanskar Hospital| @ViewBag.Title</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/admin_assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin_assets/plugins/summernote/dist/summernote.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/admin_assets/plugins/html5-editor/bootstrap-wysihtml5.css" />
+    <link href="/admin_assets/plugins/toast-master/css/jquery.toast.css" rel="stylesheet">
+
+
+    <!-- morris CSS -->
+    <link href="/admin_assets/plugins/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/admin_assets/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/admin_assets/css/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="/admin_assets/css/colors/green.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/Admin">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="/admin_assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon -->
+                            <img src="/admin_assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text --><span>
+                            <!-- dark Logo text -->
+                            <img src="/admin_assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo text -->
+                            <img src="/admin_assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                        </span>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <!-- ============================================================== -->
+
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+
+                        <!-- Profile -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/admin_assets/images/users/pngtree-admin.jpg" alt="user" class="profile-pic" /></a>
+                            <div class="dropdown-menu dropdown-menu-right scale-up">
+                                <ul class="dropdown-user">
+                                    <li>
+                                        <div class="dw-user-box">
+                                            <div class="u-img"><img src="/admin_assets/images/users/pngtree-admin.jpg" alt="user"></div>
+                                            <div class="u-text">
+                                                <h4></h4>
+                                                <p class="text-muted">
+
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <!--<li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
+                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li role="separator" class="divider"></li>-->
+                                    <li><a href="/Login/ChangePassword"><i class="ti-settings"></i> Change Password</a></li>
+                                    <li><a href="/Login/LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- User profile -->
+                <div class="user-profile">
+                    <!-- User profile image -->
+                    <div class="profile-img">
+                        <img src="/admin_assets/images/users/pngtree-admin.jpg" alt="user" />
+                        <!-- this is blinking heartbit-->
+                        <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
+                    </div>
+                    <!-- User profile text-->
+                    <div class="profile-text">
+                        <h5></h5>
+
+
+                        <a href="/Login/Logout" class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+                        <div class="dropdown-menu animated flipInY">
+                            <!-- text-->
+                            <!-- text-->
+                            <a href="/Login/Logout" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                            <!-- text-->
+                        </div>
+                    </div>
+                </div>
+                <!-- End User profile text-->
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="nav-devider"></li>
+
+                        <li>
+                            <a class="waves-effect waves-dark" href="/Admin" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span class="label label-rouded label-themecolor pull-right"></span></span></a>
+
+                        </li>
+                        <li @TempData["PatientSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Patient Master</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["PatientInfo"]>
+                                    <a href="/Admin/Patient">Add Patient</a>
+                                </li>
+                            </ul>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["PatientAdmission"]>
+                                    <a href="/Patient/PatientAdmission">Add Patient Admission</a>
+                                </li>
+                            </ul>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["PatientInvestigation"]>
+                                    <a href="/Patient/PatientInvestigation">Add Patient Investigation</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["DoctorSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Doctor Master</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["DoctorInfo"]>
+                                    <a href="/Admin/Doctor">Add Doctor</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["NurseSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Nurse Master</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["NurseInfo"]>
+                                    <a href="/Admin/Nurse">Add Nurse</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["DrugSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Drug Master</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["DrugInfo"]>
+                                    <a href="/Admin/Drug">Add Drug</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["TreatmentChartSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Treatment Chart</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["TreatmentChart"]>
+                                    <a href="/Admin/TreatmentChart">Add Treatment Chart</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["DoctorProgressNoteSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Doctor Progress Note</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["DoctorProgressNote"]>
+                                    <a href="/Admin/DoctorProgressNote">Add Doctor Progress Note</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["RBSChartSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">RBS Chart</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["RBSChart"]>
+                                    <a href="/Admin/RBSChart">Add RBS Chart</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["NursingAssessmentSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Nursing Assessment</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["NursingAssessment"]>
+                                    <a href="/Admin/NursingAssessment">Add Nursing Assessment</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["ItemSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Item Master</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["ItemMaster"]>
+                                    <a href="/Item/ItemMaster">Add Item Master</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["NursingCarePlanSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Nursing Care Plan</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["NursingCarePlan"]>
+                                    <a href="/Admin/NursingCarePlan">Add Nursing Care Plan</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["TPRInputOutputSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">TPR Input Output</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["TPRInputOutput"]>
+                                    <a href="/Admin/TPRInputOutput">Add TPR Input Output</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["MRDCheckListSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">MRD Checklist</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["MRDCheckList"]>
+                                    <a href="/Admin/MRDChecklist">Add MRD Checklist</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["SurgeryNoteSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Surgery Note</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["MRDCheckList"]>
+                                    <a href="/Admin/SurgeryNote">Add Surgery Note</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["SurgeryNameMasterSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Surgery Name Master</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["SurgeryNameMaster"]>
+                                    <a href="/Admin/SurgeryNameMaster">Add Surgery Name Master</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["AnaesthesiaMasterSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Anaesthesia Master</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["AnaesthesiaMaster"]>
+                                    <a href="/Admin/AnaesthesiaMaster">Add Anaesthesia Master</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["SurgeryChecklistSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Surgery Checklist</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["SurgeryChecklist"]>
+                                    <a href="/Admin/SurgeryChecklist">Add Surgery Checklist</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["PreOperativeFitnessSetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Pre Operative Fitness</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["SurgeryChecklist"]>
+                                    <a href="/Admin/PreOperativeFitness">Add Pre Operative Fitness</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li @TempData["DischargeSummarySetting"]>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fa fa-gear"></i>
+                                <span class="hide-menu">Discharge Summary</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li @TempData["DischargeSummary"]>
+                                    <a href="/Admin/DischargeSummary">Add Discharge Summary</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">@ViewBag.Title</h3>
+                </div>
+                @*<div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+
+                        <li class="breadcrumb-item active">DashViewBag.Titleboard</li>
+                    </ol>
+                </div>*@
+                @*<div>
+                        <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+                    </div>*@
+            </div>
+
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                <!-- .right-sidebar -->
+                <div class="right-sidebar">
+                    <div class="slimscrollright">
+                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
+                        <div class="r-panel-body">
+                            <ul id="themecolors" class="m-t-20">
+                                <li><b>With Light sidebar</b></li>
+                                <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
+                                <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
+                                <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
+                                <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
+                                <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
+                                <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
+                                <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                                <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
+                                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
+                                <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
+                                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
+                                <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
+                                <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            @RenderBody()
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer"> © @DateTime.Now.Year Sanskar Hospital All rights Reserved.</footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+
+
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="/admin_assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/admin_assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="/admin_assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="/admin_assets/js/jquery.slimscroll.js"></script>
+
+    <!--Wave Effects -->
+    <script src="/admin_assets/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/admin_assets/js/sidebarmenu.js"></script>
+
+    <!--stickey kit -->
+    <script src="/admin_assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+
+    <script src="/admin_assets/js/custom.min.js"></script>
+
+
+    <script src="/admin_assets/plugins/toast-master/js/jquery.toast.js"></script>
+    <script src="/admin_assets/js/toastr.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--sparkline JavaScript -->
+    <script src="/admin_assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!--morris JavaScript -->
+    <script src="/admin_assets/plugins/raphael/raphael-min.js"></script>
+    <script src="/admin_assets/plugins/morrisjs/morris.min.js"></script>
+    <!-- Chart JS -->
+    <script src="/admin_assets/js/dashboard1.js"></script>
+
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+
+    <script src="/admin_assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+
+    <script src="/admin_assets/plugins/tinymce/tinymce.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            if ($("#mymce").length > 0) {
+                tinymce.init({
+                    selector: "textarea#mymce",
+                    theme: "modern",
+                    height: 300,
+                    plugins: [
+                        "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                        "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                        "save table contextmenu directionality emoticons template paste textcolor"
+                    ],
+                    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons",
+
+                });
+            }
+        });
+    </script>
+
+    <script src="/admin_assets/plugins/summernote/dist/summernote.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+
+            $('.summernote').summernote({
+                height: 350, // set editor height
+                minHeight: null, // set minimum height of editor
+                maxHeight: null, // set maximum height of editor
+                focus: false // set focus to editable area after initializing summernote
+            });
+
+            $('.inline-editor').summernote({
+                airMode: true
+            });
+
+        });
+
+        window.edit = function () {
+            $(".click2edit").summernote()
+        },
+            window.save = function () {
+                $(".click2edit").summernote('destroy');
+            }
+    </script>
+    <!-- This is data table -->
+    <script src="/admin_assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    "columnDefs": [{
+                        "visible": false,
+                        "targets": 2
+                    }],
+                    "order": [
+                        [2, 'asc']
+                    ],
+                    "displayLength": 25,
+                    "drawCallback": function (settings) {
+                        var api = this.api();
+                        var rows = api.rows({
+                            page: 'current'
+                        }).nodes();
+                        var last = null;
+                        api.column(2, {
+                            page: 'current'
+                        }).data().each(function (group, i) {
+                            if (last !== group) {
+                                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                                last = group;
+                            }
+                        });
+                    }
+                });
+                // Order by the grouping
+                $('#example tbody').on('click', 'tr.group', function () {
+                    var currentOrder = table.order()[0];
+                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                        table.order([2, 'desc']).draw();
+                    } else {
+                        table.order([2, 'asc']).draw();
+                    }
+                });
+            });
+        });
+        $('#example23').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    </script>
+    <!-- Datepicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.numberonly').keypress(function (e) {
+
+                var charCode = (e.which) ? e.which : event.keyCode
+
+                if (String.fromCharCode(charCode).match(/[^0-9]/g))
+
+                    return false;
+
+            });
+            $(".date-picker").datepicker({
+                format: 'dd-mm-yyyy', // Customize the date format if needed
+                autoclose: true // Close the datepicker when a date is selected
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+
+
+@if (Session["SUCCESS"] != null)
+{
+    <script>
+
+
+
+        $(document).ready(function () {
+            $.toast({
+                heading: 'Welcome To Sanskar Hospital',
+                text: '@Session["SUCCESS"]',
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: 'success',
+                hideAfter: 3500,
+                stack: 6
+            });
+
+
+        })
+
+
+
+
+    </script>
+}
+else
+        if (Session["ERROR"] != null)
+{
+    <script>
+        $(document).ready(function () {
+
+            $.toast({
+                heading: 'Welcome To Sanskar Hospital',
+                text: '@Session["ERROR"]',
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: 'error',
+                hideAfter: 3500
+
+            });
+
+        })
+    </script>
+}
+else
+        if (Session["WARNING"] != null)
+{
+    <script>
+        $(document).ready(function () {
+
+            $.toast({
+                heading: 'Welcome To Sanskar Hospital',
+                text: '@Session["WARNING"]',
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: 'warning',
+                hideAfter: 3500
+
+            });
+
+        })
+    </script>
+}
+

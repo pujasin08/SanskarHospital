@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "MRD Checklist List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">MRD Checklist List</h4>
+                    <div><a href="/Admin/MRDChecklist" style="text-decoration:underline !important">Go Back</a></div>
+                    <br />
+                    <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                    <div class="table-responsive m-t-30">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>IPD No.</th>
+                                    <th>Discharge Summary</th>
+                                    <th>Case Sheet</th>
+                                    <th>Dr Continuation Sheet</th>
+                                    <th>Consent Form</th>
+                                    <th>Pre Operative Checklist</th>
+                                    <th>Pre Operative Surgeon</th>
+                                    <th>Pre Anaesthesia Evaluation</th>
+                                    <th>Anaesthesia Formulation</th>
+                                    <th>Intra Anaesthesia Record</th>
+                                    <th>Post Anaesthesia Record</th>
+                                    <th>Post Operative Surgeon</th>
+                                    <th>TPR Chart</th>
+                                    <th>Intake Output Chart</th>
+                                    <th>Drug Chart</th>
+                                    <th>Nurse Note</th>
+                                    <th>Investigation Report</th>
+                                    <th>General Consent</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>IPD No.</th>
+                                    <th>Discharge Summary</th>
+                                    <th>Case Sheet</th>
+                                    <th>Dr Continuation Sheet</th>
+                                    <th>Consent Form</th>
+                                    <th>Pre Operative Checklist</th>
+                                    <th>Pre Operative Surgeon</th>
+                                    <th>Pre Anaesthesia Evaluation</th>
+                                    <th>Anaesthesia Formulation</th>
+                                    <th>Intra Anaesthesia Record</th>
+                                    <th>Post Anaesthesia Record</th>
+                                    <th>Post Operative Surgeon</th>
+                                    <th>TPR Chart</th>
+                                    <th>Intake Output Chart</th>
+                                    <th>Drug Chart</th>
+                                    <th>Nurse Note</th>
+                                    <th>Investigation Report</th>
+                                    <th>General Consent</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (ViewBag.tprlist != null)
+                                {
+                                    foreach (SanskarHospital.Models.MRDChecklistModel i in ViewBag.tprlist)
+                                    {
+                                        <tr id="Busval_@i.patient_id">
+
+                                            <td>@(++co)</td>
+                                            <td>@i.ipd_number</td>
+                                            <td>@i.discharge_summary</td>
+                                            <td>@i.casesheet</td>
+                                            <td>@i.dr_continuation_sheet</td>
+                                            <td>@i.consent_from_for_procedures</td>
+                                            <td>@i.pre_operative_checklist</td>
+                                            <td>@i.pre_operative_surgeon</td>
+                                            <td>@i.pre_anaesthesia_evalution</td>
+                                            <td>@i.anaesthesia_formulation_care_plan</td>
+                                            <td>@i.intra_anaesthesia_record</td>
+                                            <td>@i.post_anaesthesia_record</td>
+                                            <td>@i.tpr_chart</td>
+                                            <td>@i.intake_output_chart</td>
+                                            <td>@i.drug_chart</td>
+                                            <td>@i.nurse_note</td>
+                                            <td>@i.investigation_report</td>
+                                            <td>@i.general_consent</td>
+
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

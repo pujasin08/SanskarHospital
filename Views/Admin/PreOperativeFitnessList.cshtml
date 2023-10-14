@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Pre Operative Fitness List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Pre Operative Fitness List</h4>
+                    <div><a href="/Admin/PreOperativeFitness" style="text-decoration:underline !important">Go Back</a></div>
+                    <br />
+                    <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                    <div class="table-responsive m-t-30">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Name Of Patient</th>
+                                    <th>H_O_Doe</th>
+                                    <th>H_O_HBP</th>
+                                    <th>H_O_Major_Medical Complain</th>
+                                    <th>H_O_Blood_Transfusion Complain</th>
+                                    <th>Temp</th>
+                                    <th>Pulse</th>
+                                    <th>BP</th>
+                                    <th>R_S_Bil</th>
+                                    <th>No_Rales</th>
+                                    <th>S1S2</th>
+                                    <th>No_Gallop</th>
+                                    <th>P_A_Soft</th>
+                                    <th>Liver_Spleen</th>
+                                    <th>CNS_Conscious</th>
+                                    <th>ECG</th>
+                                    <th>Pre_Of</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Name Of Patient</th>
+                                    <th>H_O_Doe</th>
+                                    <th>H_O_HBP</th>
+                                    <th>H_O_Major_Medical Complain</th>
+                                    <th>H_O_Blood_Transfusion Complain</th>
+                                    <th>Temp</th>
+                                    <th>Pulse</th>
+                                    <th>BP</th>
+                                    <th>R_S_Bil</th>
+                                    <th>No_Rales</th>
+                                    <th>S1S2</th>
+                                    <th>No_Gallop</th>
+                                    <th>P_A_Soft</th>
+                                    <th>Liver_Spleen</th>
+                                    <th>CNS_Conscious</th>
+                                    <th>ECG</th>
+                                    <th>Pre_Of</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (ViewBag.preoperativefitnesslist != null)
+                                {
+                                    foreach (SanskarHospital.Models.PreOperativeFitnessModel i in ViewBag.preoperativefitnesslist)
+                                    {
+                                        <tr id="Busval_@i.patient_id">
+
+                                            <td>@(++co)</td>
+                                            <td>@i.date</td>
+                                            <td>@i.patient_id</td>
+                                            <td>@i.h_o_doe</td>
+                                            <td>@i.h_o_hbp</td>
+                                            <td>@i.h_o_mejor_medical</td>
+                                            <td>@i.h_o_blood_transfusion</td>
+                                            <td>@i.temp</td>
+                                            <td>@i.pulse</td>
+                                            <td>@i.bp</td>
+                                            <td>@i.r_s_bil</td>
+                                            <td>@i.no_rales</td>
+                                            <td>@i.s1s2</td>
+                                            <td>@i.nogallop</td>
+                                            <td>@i.p_a_soft</td>
+                                            <td>@i.liver_spleen</td>
+                                            <td>@i.cns_conscious</td>
+                                            <td>@i.ecg</td>
+                                            <td>@i.pre_of</td>
+
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

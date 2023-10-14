@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Discharge Summary List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Discharge Summary List</h4>
+                    <div><a href="/Admin/DischargeSummary" style="text-decoration:underline !important">Go Back</a></div>
+                    <br />
+                    <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                    <div class="table-responsive m-t-30">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Indoor No.</th>
+                                    <th>Room No.</th>
+                                    <th>Admission Date</th>
+                                    <th>Admission Time</th>
+                                    <th>Discharge Date</th>
+                                    <th>Discharge Time</th>
+                                    <th>Reference Doctor 1</th>
+                                    <th>Reference Doctor 2</th>
+                                    <th>Reference Doctor 3</th>
+                                    <th>Admission Reason</th>
+                                    <th>Diagnosis</th>
+                                    <th>Followup After Discharge</th>
+                                    <th>Condition On Discharge</th>
+                                    <th>Treatment On Discharge</th>
+                                    <th>Treatment Given</th>
+                                    <th>Brief History</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Indoor No.</th>
+                                    <th>Room No.</th>
+                                    <th>Admission Date</th>
+                                    <th>Admission Time</th>
+                                    <th>Discharge Date</th>
+                                    <th>Discharge Time</th>
+                                    <th>Reference Doctor 1</th>
+                                    <th>Reference Doctor 2</th>
+                                    <th>Reference Doctor 3</th>
+                                    <th>Admission Reason</th>
+                                    <th>Diagnosis</th>
+                                    <th>Followup After Discharge</th>
+                                    <th>Condition On Discharge</th>
+                                    <th>Treatment On Discharge</th>
+                                    <th>Treatment Given</th>
+                                    <th>Brief History</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (ViewBag.dischargesummarylist != null)
+                                {
+                                    foreach (SanskarHospital.Models.DischargeSummaryModel i in ViewBag.dischargesummarylist)
+                                    {
+                                        <tr id="Busval_@i.patient_id">
+
+                                            <td>@(++co)</td>
+                                            <td>@i.patient_id</td>
+                                            <td>@i.indoor_no</td>
+                                            <td>@i.room_no</td>
+                                            <td>@i.admision_date</td>
+                                            <td>@i.admision_time</td>
+                                            <td>@i.discharge_date</td>
+                                            <td>@i.discharge_time</td>
+                                            <td>@i.reference_doctor_1</td>
+                                            <td>@i.reference_doctor_2</td>
+                                            <td>@i.reference_doctor_3</td>
+                                            <td>@i.admission_reason</td>
+                                            <td>@i.diagnosis</td>
+                                            <td>@i.followup_after_discharge</td>
+                                            <td>@i.condition_on_discharge</td>
+                                            <td>@i.treatment_on_discharge</td>
+                                            <td>@i.treatment_given</td>
+                                            <td>@i.brief_history</td>
+
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

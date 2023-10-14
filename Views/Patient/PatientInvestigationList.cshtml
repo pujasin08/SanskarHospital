@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "Patient Investigation List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="container-fluid">
+    @if (TempData["MSG"] != null)
+    {
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+            <strong>@TempData["MSG"]</strong>
+        </div>
+    }
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"> Patient Investigation List</h4>
+                    <div><a href="/Patient/PatientInvestigation" style="text-decoration:underline !important">Go Back</a></div>
+                    <br />
+                    <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                    <div class="table-responsive m-t-30">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name Of Doctor</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Date</th>
+                                    <th>HB</th>
+                                    <th>TC</th>
+                                    <th>DC</th>
+                                    <th>ESR</th>
+                                    <th>PC</th>
+                                    <th>SMER</th>
+                                    <th>Urine</th>
+                                    <th>Stool</th>
+                                    <th>RBS</th>
+                                    <th>Creatinine</th>
+                                    <th>NA</th>
+                                    <th>K</th>
+                                    <th>CA</th>
+                                    <th>S_Billi</th>
+                                    <th>SGPT</th>
+                                    <th>S_ALK_PO4_ASE</th>
+                                    <th>A_ALK_PO4_ASE</th>
+                                    <th>S_Amylase</th>
+                                    <th>S_Lipase</th>
+                                    <th>S_Protien</th>
+                                    <th>ECG</th>
+                                    <th>CXR</th>
+                                    <th>USG_Sonography</th>
+                                    <th>CT_MR</th>
+                                    <th>Others</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name Of Doctor</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Date</th>
+                                    <th>HB</th>
+                                    <th>TC</th>
+                                    <th>DC</th>
+                                    <th>ESR</th>
+                                    <th>PC</th>
+                                    <th>SMER</th>
+                                    <th>Urine</th>
+                                    <th>Stool</th>
+                                    <th>RBS</th>
+                                    <th>Creatinine</th>
+                                    <th>NA</th>
+                                    <th>K</th>
+                                    <th>CA</th>
+                                    <th>S_Billi</th>
+                                    <th>SGPT</th>
+                                    <th>S_ALK_PO4_ASE</th>
+                                    <th>A_ALK_PO4_ASE</th>
+                                    <th>S_Amylase</th>
+                                    <th>S_Lipase</th>
+                                    <th>S_Protien</th>
+                                    <th>ECG</th>
+                                    <th>CXR</th>
+                                    <th>USG_Sonography</th>
+                                    <th>CT_MR</th>
+                                    <th>Others</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (ViewBag.investigationlist != null)
+                                {
+                                    foreach (SanskarHospital.Models.PatientInvestigation i in ViewBag.investigationlist)
+                                    {
+                                        <tr id="Busval_@i.patient_id">
+
+                                            <td>@(++co)</td>
+                                            <td>@i.doctor_id</td>
+                                            <td>@i.patient_id</td>
+                                            <td>@i.date</td>
+                                            <td>@i.hb</td>
+                                            <td>@i.tc</td>
+                                            <td>@i.dc</td>
+                                            <td>@i.esr</td>
+                                            <td>@i.pc</td>
+                                            <td>@i.smer</td>
+                                            <td>@i.urine</td>
+                                            <td>@i.stool</td>
+                                            <td>@i.rbs</td>
+                                            <td>@i.creatinine</td>
+                                            <td>@i.na</td>
+                                            <td>@i.k</td>
+                                            <td>@i.ca</td>
+                                            <td>@i.s_billi</td>
+                                            <td>@i.sgpt</td>
+                                            <td>@i.s_alk_po4_ase</td>
+                                            <td>@i.a_alk_po4_ase</td>
+                                            <td>@i.s_amylase</td>
+                                            <td>@i.s_lipase</td>
+                                            <td>@i.s_protein</td>
+                                            <td>@i.ecg</td>
+                                            <td>@i.cxr</td>
+                                            <td>@i.usg_sonography</td>
+                                            <td>@i.ct_mr</td>
+                                            <td>@i.others</td>
+
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

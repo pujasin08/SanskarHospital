@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Surgery Note List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Surgery Note List</h4>
+                    <div><a href="/Admin/SurgeryNote" style="text-decoration:underline !important">Go Back</a></div>
+                    <br />
+                    <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                    <div class="table-responsive m-t-30">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Name Of Doctor</th>
+                                    <th>Name Of Doctor(A)</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Diagnosis Pre Op</th>
+                                    <th>Diagnosis Post Op</th>
+                                    <th>Indoor No.</th>
+                                    <th>Procedure</th>
+                                    <th>Steps</th>
+                                    <th>Pre Assessment Time</th>
+                                    <th>Pre Assessment Pulse</th>
+                                    <th>Pre Assessment BP</th>
+                                    <th>Pre Assessment Spo2</th>
+                                    <th>Pre Assessment iv</th>
+                                    <th>Pre Assessment Output</th>
+                                    <th>Pre Assessment Bloodloss</th>
+                                    <th>Findings</th>
+                                    <th>Drains</th>
+                                    <th>Complication</th>
+                                    <th>Advice</th>
+                                    <th>Post Time</th>
+                                    <th>Post Temp</th>
+                                    <th>Post Pulse</th>
+                                    <th>Post BP</th>
+                                    <th>Post Spo2</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Name Of Doctor</th>
+                                    <th>Name Of Doctor(A)</th>
+                                    <th>Name Of Patient</th>
+                                    <th>Diagnosis Pre Op</th>
+                                    <th>Diagnosis Post Op</th>
+                                    <th>Indoor No.</th>
+                                    <th>Procedure</th>
+                                    <th>Steps</th>
+                                    <th>Pre Assessment Time</th>
+                                    <th>Pre Assessment Pulse</th>
+                                    <th>Pre Assessment BP</th>
+                                    <th>Pre Assessment Spo2</th>
+                                    <th>Pre Assessment iv</th>
+                                    <th>Pre Assessment Output</th>
+                                    <th>Pre Assessment Bloodloss</th>
+                                    <th>Findings</th>
+                                    <th>Drains</th>
+                                    <th>Complication</th>
+                                    <th>Advice</th>
+                                    <th>Post Time</th>
+                                    <th>Post Temp</th>
+                                    <th>Post Pulse</th>
+                                    <th>Post BP</th>
+                                    <th>Post Spo2</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @if (ViewBag.surgerynotelist != null)
+                                {
+                                    foreach (SanskarHospital.Models.SurgeryNoteModel i in ViewBag.surgerynotelist)
+                                    {
+                                        <tr id="Busval_@i.patient_id">
+
+                                            <td>@(++co)</td>
+                                            <td>@i.date</td>
+                                            <td>@i.time</td>
+                                            <td>@i.doctor_id</td>
+                                            <td>@i.doctor_id</td>
+                                            <td>@i.patient_id</td>
+                                            <td>@i.diagnosis_pre_op</td>
+                                            <td>@i.diagnosis_post_op</td>
+                                            <td>@i.indoor_no</td>
+                                            <td>@i.proce_dure</td>
+                                            <td>@i.steps</td>
+                                            <td>@i.pre_assessment_time</td>
+                                            <td>@i.pre_assessment_pulse</td>
+                                            <td>@i.pre_assessment_bp</td>
+                                            <td>@i.pre_assessment_spo2</td>
+                                            <td>@i.pre_assessment_iv</td>
+                                            <td>@i.pre_assessment_output</td>
+                                            <td>@i.pre_assessment_bloodloss</td>
+                                            <td>@i.findings</td>
+                                            <td>@i.drains</td>
+                                            <td>@i.complication</td>
+                                            <td>@i.advice</td>
+                                            <td>@i.post_time</td>
+                                            <td>@i.post_temp</td>
+                                            <td>@i.post_pulse</td>
+                                            <td>@i.post_bp</td>
+                                            <td>@i.post_spo2</td>
+
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

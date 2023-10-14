@@ -1,0 +1,86 @@
+﻿@model SanskarHospital.Models.PatientAdmission
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanskar Hospital</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assects/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <u>
+                    <h4>PATIENT'S HISTORY SHEET</h4>
+                </u>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>Patient's Name: <b><span>@Model.patient_name</span></b></p>
+                <p>Patient's Address: <b><span>@Model.patient_address</span></b></p>
+            </div>
+            <div class="col-6">
+                <p>Arrival Time: <b><span>@Model.arrival_time</span></b></p>
+                <p>UHID No: <b><span>@Model.uhid</span></b></p>
+                <p>Telephone No: <b><span>@Model.patient_mobile</span></b></p>
+                <p>Age: <b><span></span></b></p>
+                <p>Admission Date: <b><span>@Model.date_of_addmission</span></b></p>
+                <p>Discharge Date: <b><span>@Model.discharge_date</span></b></p>
+            </div>
+            <div class="col-6">
+                <p>Assessment Time: <b><span>@Model.assesment_time</span></b></p>
+                <p>Room No: <b><span>@Model.room_no</span></b></p>
+                <p>Indoor No: <b><span>@Model.indoor_no</span></b></p>
+                <p>Sex: <b><span>@Model.patient_sex</span></b></p>
+                <p>Admission Time: <b><span>@Model.addmission_time</span></b></p>
+                <p>Discharge Time: <b><span>@Model.discharge_time</span></b></p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p style="height: 100px;">Examination: 
+                <br /><b><span>@Model.examination</span></b></p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p style="height: 100px;">Diagnosis: <br />
+                <b><span>@Model.diagnosis</span></b></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+ 
+
+</body>
+
+</html>

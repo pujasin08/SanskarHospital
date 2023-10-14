@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Patient Admission List";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    int co = 0;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"> Patient Admission List</h4>
+                <div><a href="/Patient/PatientAdmission" style="text-decoration:underline !important">Go Back</a></div>
+                <br />
+                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                <div class="table-responsive m-t-30">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Print</th>
+                                <th>Id</th>
+                                <th>Name Of Patient</th>
+                                <th>Arrival Time</th>
+                                <th>Assessment Time</th>
+                                <th>Room No.</th>
+                                <th>Indoor No.</th>
+                                <th>Date Of Admission</th>
+                                <th>Admission Time</th>
+                                <th>Date Of Discharge</th>
+                                <th>Discharge Time</th>
+                                <th>History</th>
+                                <th>Examination</th>
+                                <th>Diagnosis</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Print</th>
+                                <th>Id</th>
+                                <th>Name Of Patient</th>
+                                <th>Arrival Time</th>
+                                <th>Assessment Time</th>
+                                <th>Room No.</th>
+                                <th>Indoor No.</th>
+                                <th>Date Of Admission</th>
+                                <th>Admission Time</th>
+                                <th>Date Of Discharge</th>
+                                <th>Discharge Time</th>
+                                <th>History</th>
+                                <th>Examination</th>
+                                <th>Diagnosis</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @if (ViewBag.admissionlist != null)
+                            {
+                                foreach (SanskarHospital.Models.PatientAdmission i in ViewBag.admissionlist)
+                                {
+                                    <tr id="Busval_@i.patient_id">
+
+                                        <td><a class="btn btn-primary" href="javascript:void(0)" onclick="PrintPatientHistory(@i.patient_id)">Print</a></td>
+                                        <td>@(++co)</td>
+                                        <td>@i.patient_name</td>
+                                        <td>@i.arrival_time</td>
+                                        <td>@i.assesment_time</td>
+                                        <td>@i.room_no</td>
+                                        <td>@i.indoor_no</td>
+                                        <td>@i.date_of_addmission</td>
+                                        <td>@i.addmission_time</td>
+                                        <td>@i.discharge_date</td>
+                                        <td>@i.discharge_time</td>
+                                        <td>@i.history</td>
+                                        <td>@i.examination</td>
+                                        <td>@i.diagnosis</td>
+
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function PrintPatientHistory(patient_id) {
+            // Open another page in a new window or tab
+            var newWindow = window.open('/PrintPdf/PatientHistory/' + patient_id);
+
+            // Wait for the new window to load and then trigger the print
+            newWindow.onload = function() {
+                newWindow.print();
+            };
+
+            // Set up event listeners to check for print cancellation
+            newWindow.onbeforeprint = function () {
+                window.isPrintCanceled = false;
+            };
+
+            newWindow.onafterprint = function () {
+                // Check if the print operation was canceled
+                if (window.isPrintCanceled) {
+                    // Close the current window
+                    window.close();
+                }
+            };
+        }
+    </script>
+}
